@@ -179,7 +179,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            result += "You are " + currentRoom.getDescription();
+            result += "You are " + currentRoom.getDescription()+"\n";
             result += currentRoom.getExits();
             result += "\n";
         }

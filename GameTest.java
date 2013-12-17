@@ -52,7 +52,16 @@ public class GameTest
         Command goSouth = new Command("go", "south");
         assertTrue("should be in computing lab",game1.processCommand(goSouth).contains("computing lab"));
     }
+
+    @Test
+    public void testGoNorth()
+    {
+        Command command1 = new Command("go", "north");
+        java.lang.String string1 = game1.processCommand(command1);
+        assertEquals(true, string1.contains("no door"));
+    }
 }
+
 
 
 
