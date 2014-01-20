@@ -30,12 +30,12 @@ public class Parser
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
+
     private String readLine(){
         System.out.print("> ");     // print prompt
-
         return  reader.nextLine();
-
     }
+
     /**
      * @return The next command from the user.
      */

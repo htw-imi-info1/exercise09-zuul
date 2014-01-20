@@ -1,7 +1,6 @@
 #BlueJ class context
 comment0.params=
-comment0.target=GameTest()
-comment0.text=\n\ Default\ constructor\ for\ test\ class\ GameTest\n
+comment0.target=GameSystemTest()
 comment1.params=
 comment1.target=void\ setUp()
 comment1.text=\n\ Sets\ up\ the\ test\ fixture.\n\n\ Called\ before\ every\ test\ case\ method.\n
