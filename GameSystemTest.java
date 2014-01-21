@@ -68,7 +68,8 @@ public class GameSystemTest
         //when
         String output = game.processCommand(command);
         //then
-        assertTrue("should be in computing lab",output.contains("computing lab"));
+        assertTrue("should be in computing lab",
+        output.contains("computing lab"));
     }
 
     @Test
@@ -81,6 +82,44 @@ public class GameSystemTest
         //then
         assertEquals(true, output.contains("no door"));
     }
+    /**
+     * version 1: manual test case
+     */
+    @Test
+    public void testGoWithoutDirection()
+    {
+        //given
+        Command command = parser.getCommand("go");
+        //when
+        String output = game.processCommand(command);
+        //then
+        assertEquals(true, output.contains("Go where"));
+    }
+
+    /**
+     * version 2: recorded test case
+     */
+    @Test
+    public void goWODirectionShouldShowError()
+    {
+        Command command1 = parser.getCommand("go");
+        assertEquals("Go where?", game.processCommand(command1));
+    }
+    
+    @Test
+    public void testCoffee()
+    {
+        //given
+        Command command = parser.getCommand("go south");
+        game.processCommand(command);
+        command = parser.getCommand("go east");
+        //when
+        String output = game.processCommand(command);
+        //then
+        assertEquals(true, output.contains("coffee machine"));
+    }
+    
 }
+
 
 
