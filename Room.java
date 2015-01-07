@@ -61,21 +61,5 @@ public class Room
     /**
      * @return All exits of the room.
      */
-    public String getExits(){
-         
-               String result = "Exits: ";
-            if(this.northExit != null) {
-                result += "north ";
-            }
-            if(this.eastExit != null) {
-                result += "east ";
-            }
-            if(this.southExit != null) {
-                result += "south ";
-            }
-            if(this.westExit != null) {
-                result += "west ";
-            }
-            return result;
-        }
+    
 }

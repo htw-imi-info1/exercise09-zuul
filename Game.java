@@ -125,7 +125,7 @@ public class Game
             result = goRoom(command);
         else if (commandWord.equals("quit"))
             result = quit(command);
-          
+
         return result;
 
     }
@@ -158,7 +158,7 @@ public class Game
         }
 
         String direction = command.getSecondWord();
-        
+
         // Try to leave current room.
         Room nextRoom = null;
         if(direction.equals("north")) {
@@ -180,9 +180,22 @@ public class Game
         else {
             currentRoom = nextRoom;
             result += "You are " + currentRoom.getDescription()+"\n";
-            result += currentRoom.getExits();
-            result += "\n";
+            if(currentRoom.northExit != null) {
+                result += "north ";
+            }
+            if(currentRoom.eastExit != null) {
+                result += "east ";
+            }
+            if(currentRoom.southExit != null) {
+                result += "south ";
+            }
+            if(currentRoom.westExit != null) {
+                result += "west ";
+            }
+            return result;
         }
+        result += "\n";
+
         return result;
     }
 
@@ -205,5 +218,5 @@ public class Game
         Game game = new Game();
         game.play();
     }
-    
+
 }
