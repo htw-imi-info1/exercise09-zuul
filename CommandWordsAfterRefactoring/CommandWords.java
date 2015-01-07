@@ -19,10 +19,8 @@ public class CommandWords
      */
     public CommandWords()
     {
-        List<CommandWord> allCommandWords 
-        = Arrays.asList(CommandWord.values());
         validCommands = new HashMap<String, CommandWord>();
-        for (CommandWord cw : allCommandWords){
+        for (CommandWord cw : CommandWord.values()){
             validCommands.put(cw.toString(),cw);
         }
         
@@ -33,7 +31,6 @@ public class CommandWords
         return validCommands.get(commandString);
     }
    
-
     /**
      * Check whether a given String is a valid command word. 
      * @return true if a given string is a valid command,
