@@ -119,6 +119,27 @@ public class GameSystemTest
         assertEquals(true, output.contains("coffee machine"));
     }
     
+    @Test
+    public void completeWalkthrough()
+    {
+        goAndSee("east",  "lecture theatre");
+        goAndSee("west",  "main entrance");
+        goAndSee("west",  "campus pub");
+        goAndSee("east",  "main entrance");
+        goAndSee("south", "computing lab");
+        goAndSee("east",  "admin office");
+        goAndSee("west",  "computing lab");
+        goAndSee("north", "main entrance"); 
+    }
+    private void goAndSee(String direction, String whatShouldBeContained){
+        //given
+        Command command = parser.getCommand("go "+direction);
+        //when
+        String result = game.processCommand(command);
+        //then
+        if (!result.contains(whatShouldBeContained))
+            fail(result +" does not contain "+whatShouldBeContained);
+    }
 }
 
 
