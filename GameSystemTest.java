@@ -140,6 +140,16 @@ public class GameSystemTest
         if (!result.contains(whatShouldBeContained))
             fail(result +" does not contain "+whatShouldBeContained);
     }
+    @Test 
+    public void showExits(){
+        game.processCommand(parser.getCommand("go south"));
+        String result = game.processCommand(parser.getCommand("go north"));
+        assertTrue(result.contains("east"));
+        assertTrue(result.contains("south"));
+        assertTrue(result.contains("west"));
+        
+    
+    }
 }
 
 
