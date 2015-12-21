@@ -58,6 +58,9 @@ public class GameSystemTest
         String output = game.processCommand(command);
         //then
         assertTrue("should print help message containing command words", output.contains("command words"));
+        assertTrue("message contains command word go", output.contains("go"));
+        assertTrue("message contains command word quit", output.contains("quit"));
+        assertTrue("message contains command word help", output.contains("help"));
     }
 
     @Test
@@ -147,8 +150,15 @@ public class GameSystemTest
         assertTrue(result.contains("east"));
         assertTrue(result.contains("south"));
         assertTrue(result.contains("west"));
-        
+    }
     
+    @Test 
+    public void showCommands(){
+        game.processCommand(parser.getCommand("go south"));
+        String result = game.processCommand(parser.getCommand("go north"));
+        assertTrue(result.contains("east"));
+        assertTrue(result.contains("south"));
+        assertTrue(result.contains("west"));
     }
 }
 

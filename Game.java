@@ -89,18 +89,21 @@ public class Game
         System.out.println();
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
+        String exits = "";
         if(currentRoom.northExit != null) {
-            System.out.print("north ");
+            exits += "north ";
         }
         if(currentRoom.eastExit != null) {
-            System.out.print("east ");
+            exits += "east ";
         }
         if(currentRoom.southExit != null) {
-            System.out.print("south ");
+            exits += "south ";
         }
         if(currentRoom.westExit != null) {
-            System.out.print("west ");
+            exits += "west ";
         }
+
+        System.out.print(exits);
         System.out.println();
     }
 
