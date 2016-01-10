@@ -17,10 +17,15 @@
  * @version 2008.03.30
  */
 
-public class Command
+public abstract class Command
 {
-    private String commandWord;
-    private String secondWord;
+    public class CommandResult{
+        public String output = null;
+        public Room nextRoom = null;
+        public boolean quit = false;
+    }
+    
+    String parameter;
 
     /**
      * Create a command object. First and second word must be supplied, but
@@ -29,45 +34,22 @@ public class Command
      *                  was not recognised.
      * @param secondWord The second word of the command.
      */
-    public Command(String firstWord, String secondWord)
+    public Command(String parameter)
     {
-        commandWord = firstWord;
-        this.secondWord = secondWord;
+        this.parameter = parameter;
     }
-
-    /**
-     * Return the command word (the first word) of this command. If the
-     * command was not understood, the result is null.
-     * @return The command word.
-     */
-    public String getCommandWord()
-    {
-        return commandWord;
-    }
-
-    /**
-     * @return The second word of this command. Returns null if there was no
-     * second word.
-     */
-    public String getSecondWord()
-    {
-        return secondWord;
-    }
-
-    /**
-     * @return true if this command was not understood.
-     */
-    public boolean isUnknown()
-    {
-        return (commandWord == null);
-    }
+    
 
     /**
      * @return true if the command has a second word.
      */
-    public boolean hasSecondWord()
+    public boolean hasParameter()
     {
-        return (secondWord != null);
+        return (parameter != null);
     }
+    public String getParameter(){
+        return parameter;
+    }
+    public abstract CommandResult execute(Room currentRoom);
 }
 
