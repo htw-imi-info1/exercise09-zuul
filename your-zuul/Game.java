@@ -67,15 +67,22 @@ public class Game
         while (! finished) {
             Command command = parser.getCommand();
             String output = processCommand(command);
-            finished = (null == output);
-            if (!finished)
-            { 
-                System.out.println(output);
-            }
-
+            System.out.println(output);
+            finished = (output == null);         
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
+    /*
+     * should eventually be included in play method
+     * and the flag in the command result be used - 
+     * kept this method such that the test don't need
+     * to be adapted for now.
+     */
+    public String processCommand(Command command){
+       Command.CommandResult cr = command.execute(currentRoom);
+            if (cr.nextRoom != null)
+                currentRoom = cr.nextRoom;
+            return cr.output;}
 
     /**
      * Print out the opening message for the player.
@@ -107,116 +114,7 @@ public class Game
         System.out.println();
     }
 
-    /**
-     * Given a command, process (that is: execute) the command.
-     * @param command The command to be processed.
-     * @return true If the command ends the game, false otherwise.
-     */
-    public String processCommand(Command command) 
-    {
-        boolean wantToQuit = false;
-
-        if(command.isUnknown()) {
-            return "I don't know what you mean...";
-        }
-
-        String commandWord = command.getCommandWord();
-        String result = null;
-        if (commandWord.equals("help"))
-            result = printHelp();
-        else if (commandWord.equals("go"))
-            result = goRoom(command);
-        else if (commandWord.equals("quit"))
-            result = quit(command);
-
-        return result;
-
-    }
-
-    // implementations of user commands:
-    /**
-     * Print out some help information.
-     * Here we print some stupid, cryptic message and a list of the 
-     * command words.
-     */
-    private String printHelp() 
-    {   String result = "";
-        result += "You are lost. You are alone. You wander\n";
-        result += "around at the university.\n";
-        result += "\n";
-        result += "Your command words are:\n";
-        result += "   go quit help\n";
-        return result;
-    }
-
-    /** 
-     * Try to go to one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    private String goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            return "Go where?";
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = null;
-        if(direction.equals("north")) {
-            nextRoom = currentRoom.northExit;
-        }
-        if(direction.equals("east")) {
-            nextRoom = currentRoom.eastExit;
-        }
-        if(direction.equals("south")) {
-            nextRoom = currentRoom.southExit;
-        }
-        if(direction.equals("west")) {
-            nextRoom = currentRoom.westExit;
-        }
-        String result = "";
-        if (nextRoom == null) {
-            result += "There is no door!";
-        }
-        else {
-            currentRoom = nextRoom;
-            result += "You are " + currentRoom.getDescription()+"\n";
-            if(currentRoom.northExit != null) {
-                result += "north ";
-            }
-            if(currentRoom.eastExit != null) {
-                result += "east ";
-            }
-            if(currentRoom.southExit != null) {
-                result += "south ";
-            }
-            if(currentRoom.westExit != null) {
-                result += "west ";
-            }
-            return result;
-        }
-        result += "\n";
-
-        return result;
-    }
-
-    /** 
-     * "Quit" was entered. Check the rest of the command to see
-     * whether we really quit the game.
-     * @return null, if this command quits the game, something else to output otherwise.
-     */
-    private String quit(Command command) 
-    {
-        if(command.hasSecondWord()) {
-            return "Quit what?";
-        }
-        else {
-            return null;  // signal that we want to quit
-        }
-    }
-
+    
     public static void main(String[] args){
         Game game = new Game();
         game.play();
