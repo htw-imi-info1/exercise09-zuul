@@ -71,7 +71,7 @@ public class GameSystemTest
         //when
         String output = game.processCommand(command);
         //then
-        assertTrue("should be in computing lab",
+        assertTrue("should be in computing lab"+output,
         output.contains("computing lab"));
     }
 
