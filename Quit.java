@@ -11,14 +11,15 @@ public class Quit extends Command
      * whether we really quit the game.
      * @return null, if this command quits the game, something else to output otherwise.
      */
-    public CommandResult execute(Room currentRoom){
+    public GameState execute(GameState state){
 
-        CommandResult cr = new CommandResult();
         if(hasParameter()) 
-            cr.output =  "Quit what?";
-        else 
-            cr.quit = true;
-        return cr; 
+            state.output =  "Quit what?";
+        else {
+            state.wantsToQuit= true;
+            state.output = null;
+        }
+        return state; 
     }
 }
 

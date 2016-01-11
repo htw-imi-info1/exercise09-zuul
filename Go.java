@@ -10,19 +10,19 @@ public class Go extends Command
      * Try to go to one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
-    public CommandResult execute(Room currentRoom){
+    public GameState execute(GameState state){
 
-        CommandResult commandResult = new CommandResult();
         if(!hasParameter()) {
             // if there is no second word, we don't know where to go...
-            commandResult.output= "Go where?";
-            return commandResult;
+            state.output= "Go where?";
+            return state;
         }
 
         String direction = getParameter();
 
         // Try to leave current room.
         Room nextRoom = null;
+        Room currentRoom = state.currentRoom;
         if(direction.equals("north")) {
             nextRoom = currentRoom.northExit;
         }
@@ -35,30 +35,29 @@ public class Go extends Command
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
-        commandResult.output = "";
+        state.output = "";
         if (nextRoom == null) {
-            commandResult.output += "There is no door!";
+            state.output += "There is no door!\n";
         }
         else {
-            commandResult.nextRoom = currentRoom = nextRoom;
-            commandResult.output += "You are " + currentRoom.getDescription()+"\n";
+            state.currentRoom = currentRoom = nextRoom;
+            state.output += "You are " + currentRoom.getDescription()+"\n";
+            String exits = "";
             if(currentRoom.northExit != null) {
-                commandResult.output += "north ";
+                exits += "north ";
             }
             if(currentRoom.eastExit != null) {
-                commandResult.output += "east ";
+                exits += "east ";
             }
             if(currentRoom.southExit != null) {
-                commandResult.output += "south ";
+                exits += "south ";
             }
             if(currentRoom.westExit != null) {
-                commandResult.output += "west ";
+                exits += "west ";
             }
-            return commandResult;
+            state.output += exits;
         }
-        commandResult.output += "\n";
-
-        return commandResult;
+        return state;
     }
 }
 

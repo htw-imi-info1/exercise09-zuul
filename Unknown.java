@@ -4,9 +4,8 @@ public class Unknown extends Command
     {
         super(parameter);
     }
-    public CommandResult execute(Room currentRoom){
-        CommandResult cr = new CommandResult();
-        cr.output = "I don't know what you mean...";
-        return cr;
+    public GameState execute(GameState state){
+        state.output = "I don't know what you mean...";
+        return state;
     }
 }

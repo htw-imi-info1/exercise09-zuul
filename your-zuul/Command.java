@@ -19,11 +19,7 @@
 
 public abstract class Command
 {
-    public class CommandResult{
-        public String output = null;
-        public Room nextRoom = null;
-        public boolean quit = false;
-    }
+    
     
     String parameter;
 
@@ -50,6 +46,12 @@ public abstract class Command
     public String getParameter(){
         return parameter;
     }
-    public abstract CommandResult execute(Room currentRoom);
+    /**
+     * Concrete Commands need to overwrite this
+     * method to implement their behaviour.
+     * The passed state can either be modified
+     * or a new instance can be created and returned.
+     */
+    public abstract GameState execute(GameState state);
 }
 
