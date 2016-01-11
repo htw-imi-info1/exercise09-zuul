@@ -18,7 +18,7 @@
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private GameState state = new GameState();
 
     /**
      * Create the game and initialise its internal map.
@@ -50,7 +50,7 @@ public class Game
         lab.setExits(outside, office, null, null);
         office.setExits(null, null, null, lab);
 
-        currentRoom = outside;  // start game outside
+        state.currentRoom = outside;  // start game outside
     }
 
     /**
@@ -72,23 +72,25 @@ public class Game
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
+
     /*
      * should eventually be included in play method
      * and the flag in the command result be used - 
      * kept this method such that the test don't need
      * to be adapted for now.
+     * 
      */
     public String processCommand(Command command){
-       Command.CommandResult cr = command.execute(currentRoom);
-            if (cr.nextRoom != null)
-                currentRoom = cr.nextRoom;
-            return cr.output;}
+        state = command.execute(state);
+        return state.output;
+    }
 
     /**
      * Print out the opening message for the player.
      */
     private void printWelcome()
     {
+        Room currentRoom = state.currentRoom;
         System.out.println();
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
@@ -114,7 +116,6 @@ public class Game
         System.out.println();
     }
 
-    
     public static void main(String[] args){
         Game game = new Game();
         game.play();
