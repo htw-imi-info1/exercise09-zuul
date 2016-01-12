@@ -80,7 +80,8 @@ public class Game
      * to be adapted for now.
      * 
      */
-    public String processCommand(Command command){
+    public String processCommand(Command command)
+    {
         state = command.execute(state);
         return state.output;
     }
@@ -116,7 +117,8 @@ public class Game
         System.out.println();
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args)
+    {
         Game game = new Game();
         game.play();
     }
