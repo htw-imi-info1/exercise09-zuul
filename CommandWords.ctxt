@@ -4,4 +4,6 @@ comment0.target=CommandWords()
 comment0.text=\n\ Constructor\ -\ initialise\ the\ command\ words.\n
 comment1.params=word1\ word2
 comment1.target=Command\ buildCommand(java.lang.String,\ java.lang.String)
-numComments=2
+comment2.params=word1\ word2
+comment2.target=Command\ buildCommandx(java.lang.String,\ java.lang.String)
+numComments=3

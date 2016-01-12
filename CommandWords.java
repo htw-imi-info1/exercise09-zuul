@@ -18,8 +18,16 @@ public class CommandWords
     {
 
     }
+    public static Command buildCommand(String word1, String word2){
+        switch(word1){
+            case "go" : return new Go(word2);
+            case "quit" : return new Quit(word2);
+            case "help" : return new Help(word2);
+            default: return new Unknown(word2);
+        } 
+    }
     
-    public static Command buildCommand(String word1, String word2)
+    public static Command buildCommandx(String word1, String word2)
     {
         try{
             Class<? extends Command> commandClass = commands.get(word1);
