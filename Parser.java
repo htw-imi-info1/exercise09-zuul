@@ -31,9 +31,10 @@ public class Parser
         reader = new Scanner(System.in);
     }
 
-    private String readLine(){
+    private String readLine()
+    {
         System.out.print("> ");     // print prompt
-        return  reader.nextLine();
+        return reader.nextLine();
     }
 
     /**
@@ -44,8 +45,9 @@ public class Parser
         String inputLine = readLine(); 
         return getCommand(inputLine);
     }
-    public Command getCommand(String inputLine){
-        
+    
+    public Command getCommand(String inputLine)
+    {
         String word1 = null;
         String word2 = null;
 
@@ -58,7 +60,7 @@ public class Parser
                 // note: we just ignore the rest of the input line.
             }
         }
-     return CommandWords.buildCommand(word1,word2);
+        return CommandWords.buildCommand(word1,word2);
         
     }
 }
