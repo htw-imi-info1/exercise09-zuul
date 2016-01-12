@@ -10,8 +10,8 @@ public class Go extends Command
      * Try to go to one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
-    public GameState execute(GameState state){
-
+    public GameState execute(GameState state)
+    {
         if(!hasParameter()) {
             // if there is no second word, we don't know where to go...
             state.output= "Go where?";

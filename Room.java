@@ -58,8 +58,4 @@ public class Room
     {
         return description;
     }
-    /**
-     * @return All exits of the room.
-     */
-    
 }
