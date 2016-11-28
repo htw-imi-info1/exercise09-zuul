@@ -1,4 +1,4 @@
-
+package commands;
 public class Help extends Command
 {
     public Help(String parameter)
@@ -8,7 +8,7 @@ public class Help extends Command
 
     /**
      * Print out some help information.
-     * Here we print some stupid, cryptic message and a list of the 
+     * Here we print some stupid, cryptic message and a list of the
      * command words.
      */
     public GameState execute(GameState state)
