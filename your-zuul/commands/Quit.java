@@ -1,4 +1,5 @@
 package commands;
+import game.GameState;
 public class Quit extends Command
 {
     public Quit(String parameter)

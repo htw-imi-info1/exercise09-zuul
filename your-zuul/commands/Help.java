@@ -1,4 +1,5 @@
 package commands;
+import game.GameState;
 public class Help extends Command
 {
     public Help(String parameter)

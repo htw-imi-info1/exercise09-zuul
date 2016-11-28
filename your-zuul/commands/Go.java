@@ -1,4 +1,6 @@
 package commands;
+import game.GameState;
+import game.Room;
 public class Go extends Command
 {
     public Go(String parameter)

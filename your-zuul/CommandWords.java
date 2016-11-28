@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.lang.reflect.Constructor;
+import commands.*;
 
 public class CommandWords
 {

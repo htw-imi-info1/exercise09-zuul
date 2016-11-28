@@ -1,4 +1,4 @@
-
+import commands.*;
 import static org.hamcrest.Matcher.*;
 import static org.junit.Assert.*;
 import org.junit.After;

@@ -1,4 +1,5 @@
 package commands;
+import game.GameState;
 public class Unknown extends Command
 {
     public Unknown(String parameter)
