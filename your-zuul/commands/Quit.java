@@ -1,4 +1,5 @@
-
+package commands;
+import game.GameState;
 public class Quit extends Command
 {
     public Quit(String parameter)
@@ -6,7 +7,7 @@ public class Quit extends Command
         super(parameter);
     }
 
-    /** 
+    /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
      * @return null, if this command quits the game, something else to output otherwise.
@@ -19,7 +20,6 @@ public class Quit extends Command
             state.wantsToQuit= true;
             state.output = null;
         }
-        return state; 
+        return state;
     }
 }
-

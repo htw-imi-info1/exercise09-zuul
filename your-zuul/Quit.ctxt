@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.params=parameter
-comment0.target=Quit(java.lang.String)
-comment1.params=state
-comment1.target=GameState\ execute(GameState)
-comment1.text=\ \n\ "Quit"\ was\ entered.\ Check\ the\ rest\ of\ the\ command\ to\ see\n\ whether\ we\ really\ quit\ the\ game.\n\ @return\ null,\ if\ this\ command\ quits\ the\ game,\ something\ else\ to\ output\ otherwise.\n
-numComments=2

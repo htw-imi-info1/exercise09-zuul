@@ -1,4 +1,6 @@
-
+package commands;
+import game.GameState;
+import game.Room;
 public class Go extends Command
 {
     public Go(String parameter)
@@ -6,7 +8,7 @@ public class Go extends Command
         super(parameter);
     }
 
-    /** 
+    /**
      * Try to go to one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
@@ -60,4 +62,3 @@ public class Go extends Command
         return state;
     }
 }
-
