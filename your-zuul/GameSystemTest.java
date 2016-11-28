@@ -9,10 +9,10 @@ import org.junit.Test;
  * This is a Game System Tests - it tests the
  * whole game and the endpoints between user input
  * and output to the console.
- * 
- * The original 
  *
- * @author  Barbara Kleinen
+ * The original
+ *
+ * @author  Barne Kleinen
  */
 public class GameSystemTest
 {
@@ -108,7 +108,7 @@ public class GameSystemTest
         Command command1 = parser.getCommand("go");
         assertEquals("Go where?", game.processCommand(command1));
     }
-    
+
     @Test
     public void testCoffee()
     {
@@ -121,7 +121,7 @@ public class GameSystemTest
         //then
         assertEquals(true, output.contains("coffee machine"));
     }
-    
+
     @Test
     public void completeWalkthrough()
     {
@@ -132,7 +132,7 @@ public class GameSystemTest
         goAndSee("south", "computing lab");
         goAndSee("east",  "admin office");
         goAndSee("west",  "computing lab");
-        goAndSee("north", "main entrance"); 
+        goAndSee("north", "main entrance");
     }
     private void goAndSee(String direction, String whatShouldBeContained){
         //given
@@ -143,7 +143,7 @@ public class GameSystemTest
         if (!result.contains(whatShouldBeContained))
             fail(result +" does not contain "+whatShouldBeContained);
     }
-    @Test 
+    @Test
     public void showExits(){
         game.processCommand(parser.getCommand("go south"));
         String result = game.processCommand(parser.getCommand("go north"));
@@ -151,8 +151,8 @@ public class GameSystemTest
         assertTrue(result.contains("south"));
         assertTrue(result.contains("west"));
     }
-    
-    @Test 
+
+    @Test
     public void showCommands(){
         game.processCommand(parser.getCommand("go south"));
         String result = game.processCommand(parser.getCommand("go north"));
@@ -161,6 +161,3 @@ public class GameSystemTest
         assertTrue(result.contains("west"));
     }
 }
-
-
-
