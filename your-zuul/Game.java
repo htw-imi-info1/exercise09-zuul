@@ -106,7 +106,18 @@ public class Game
         System.out.print(exits);
         System.out.println();
     }
-
+    /**
+     * This is a further method added by BK to 
+     * provide a clearer interface that can be tested:
+     * Game processes a commandLine and returns output.
+     * @param commandLine - the line entered as String
+     * @return output of the command
+     */
+    public String processCommand(String commandLine){
+        Command command = parser.getCommand(commandLine);
+        return processCommand(command);
+    } 
+    
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
