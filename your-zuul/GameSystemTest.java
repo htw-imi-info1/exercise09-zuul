@@ -59,6 +59,14 @@ public class GameSystemTest
     }
 
     @Test
+    public void testUnknownCommand(){
+        // given arbitrary game
+        // when entering unknown command
+        String output = game.processCommand("asdf");
+        // then an error message should be returned
+        assertTrue("should output error message", output.contains("I don't know what you mean"));
+    }
+    @Test
     public void testGoSouth()
     {
         //given: new game
