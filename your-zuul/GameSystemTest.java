@@ -10,8 +10,6 @@ import org.junit.Test;
  * whole game and the endpoints between user input
  * and output to the console.
  *
- * The original
- *
  * @author  Barne Kleinen
  */
 public class GameSystemTest
