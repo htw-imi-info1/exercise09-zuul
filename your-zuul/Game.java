@@ -2,23 +2,23 @@ import commands.Command;
 import game.GameState;
 import game.Room;
 /**
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
+ *  This class is the main class of the "World of Zuul" application.
+ *  "World of Zuul" is a very simple, text based adventure game.  Users
+ *  can walk around some scenery. That's all. It should really be extended
  *  to make it more interesting!
- * 
+ *
  *  To play this game, create an instance of this class and call the "play"
  *  method.
- * 
+ *
  *  This main class creates and initialises all the others: it creates all
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
- * 
+ *
  * @author  Michael Kolling and David J. Barnes
  * @version 2008.03.30
  */
 
-public class Game 
+public class Game
 {
     private Parser parser;
     private GameState state = new GameState();
@@ -26,7 +26,7 @@ public class Game
     /**
      * Create the game and initialise its internal map.
      */
-    public Game() 
+    public Game()
     {
         createRooms();
         parser = new Parser();
@@ -59,8 +59,8 @@ public class Game
     /**
      *  Main play routine.  Loops until end of play.
      */
-    public void play() 
-    {            
+    public void play()
+    {
         printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
@@ -71,17 +71,20 @@ public class Game
             Command command = parser.getCommand();
             String output = processCommand(command);
             System.out.println(output);
-            finished = (output == null);         
+            finished = (output == null);
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
 
+    public String processCommand(String inputLine){
+        return processCommand(parser.getCommand(inputLine));
+    }
     /*
      * should eventually be included in play method
-     * and the flag in the command result be used - 
+     * and the flag in the command result be used -
      * kept this method such that the test don't need
      * to be adapted for now.
-     * 
+     *
      */
     public String processCommand(Command command)
     {

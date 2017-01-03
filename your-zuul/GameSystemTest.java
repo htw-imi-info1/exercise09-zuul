@@ -10,14 +10,11 @@ import org.junit.Test;
  * whole game and the endpoints between user input
  * and output to the console.
  *
- * The original
- *
  * @author  Barne Kleinen
  */
 public class GameSystemTest
 {
     private Game game;
-    private Parser parser;
 
     public GameSystemTest()
     {
@@ -33,16 +30,14 @@ public class GameSystemTest
     public void setUp()
     {
         game = new Game();
-        parser = new Parser();
     }
 
     @Test
     public void testQuit()
     {
-        //given
-        Command command = parser.getCommand("quit");
+        //given: new game
         //when
-        String output = game.processCommand(command);
+        String output = game.processCommand("quit");
         //then
         assertEquals(
             "null is the output that signals that the main loop should stop",
@@ -52,10 +47,10 @@ public class GameSystemTest
     @Test
     public void testHelp()
     {
-        //given
-        Command command = parser.getCommand("help");
+        //given: new game
+
         //when
-        String output = game.processCommand(command);
+        String output = game.processCommand("help");
         //then
         assertTrue("should print help message containing command words", output.contains("command words"));
         assertTrue("message contains command word go", output.contains("go"));
@@ -66,35 +61,33 @@ public class GameSystemTest
     @Test
     public void testGoSouth()
     {
-        //given
-        Command command = parser.getCommand("go south");
+        //given: new game
         //when
-        String output = game.processCommand(command);
+        String output = game.processCommand("go south");
         //then
         assertTrue("should be in computing lab"+output,
-        output.contains("computing lab"));
+            output.contains("computing lab"));
     }
 
     @Test
     public void testGoNorth()
     {
-        //given
-        Command command = parser.getCommand("go north");
+        //given: new game
         //when
-        String output = game.processCommand(command);
+        String output = game.processCommand("go north");
         //then
         assertEquals(true, output.contains("no door"));
     }
+
     /**
      * version 1: manual test case
      */
     @Test
     public void testGoWithoutDirection()
     {
-        //given
-        Command command = parser.getCommand("go");
+        //given: new game
         //when
-        String output = game.processCommand(command);
+        String output = game.processCommand("go");
         //then
         assertEquals(true, output.contains("Go where"));
     }
@@ -105,19 +98,16 @@ public class GameSystemTest
     @Test
     public void goWODirectionShouldShowError()
     {
-        Command command1 = parser.getCommand("go");
-        assertEquals("Go where?", game.processCommand(command1));
+        assertEquals("Go where?", game.processCommand("go"));
     }
 
     @Test
     public void testCoffee()
     {
-        //given
-        Command command = parser.getCommand("go south");
-        game.processCommand(command);
-        command = parser.getCommand("go east");
+        //given: game with currentRoom: computer Lab
+        game.processCommand("go south");
         //when
-        String output = game.processCommand(command);
+        String output = game.processCommand("go east");
         //then
         assertEquals(true, output.contains("coffee machine"));
     }
@@ -134,19 +124,19 @@ public class GameSystemTest
         goAndSee("west",  "computing lab");
         goAndSee("north", "main entrance");
     }
+
     private void goAndSee(String direction, String whatShouldBeContained){
-        //given
-        Command command = parser.getCommand("go "+direction);
         //when
-        String result = game.processCommand(command);
+        String result = game.processCommand("go "+direction);
         //then
         if (!result.contains(whatShouldBeContained))
             fail(result +" does not contain "+whatShouldBeContained);
     }
+
     @Test
     public void showExits(){
-        game.processCommand(parser.getCommand("go south"));
-        String result = game.processCommand(parser.getCommand("go north"));
+        game.processCommand("go south");
+        String result = game.processCommand("go north");
         assertTrue(result.contains("east"));
         assertTrue(result.contains("south"));
         assertTrue(result.contains("west"));
@@ -154,8 +144,8 @@ public class GameSystemTest
 
     @Test
     public void showCommands(){
-        game.processCommand(parser.getCommand("go south"));
-        String result = game.processCommand(parser.getCommand("go north"));
+        game.processCommand("go south");
+        String result = game.processCommand("go north");
         assertTrue(result.contains("east"));
         assertTrue(result.contains("south"));
         assertTrue(result.contains("west"));
