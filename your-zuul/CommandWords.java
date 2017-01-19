@@ -60,23 +60,31 @@ public class CommandWords
         commands.put("help","commands.Help");
         commands.put("quit","commands.Quit");
     }
+    /**
+     * This looks (and is) complicated but basically just 
+     * creates an Instance of a class given as a String 
+     * from the map above.
+     */
     @SuppressWarnings("unchecked")
     public static Command buildCommandWithMap(String word1, String word2)
     {
         try{
+            // get the Class
             Class commandClass = Class.forName(commands.get(word1));
             if (commandClass == null){
                 return new Unknown(word2);
             }else {
+                // get the constructor. for this we need an
+                // Array of the Parameter types (here: just a String)
                 Class<?>[] parameterTypes = {String.class};
                 Constructor<? extends Command> commandConstructor = commandClass.getDeclaredConstructor(parameterTypes);
+                // now we have the constructor! Call it to get an instance.
                 return commandConstructor.newInstance(word2);
 
             }
         } catch(Exception c){
             System.out.println(c);
             System.out.println(c.getMessage());
-
             return new Unknown(word2);
         }
     }

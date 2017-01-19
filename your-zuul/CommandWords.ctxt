@@ -7,4 +7,5 @@ comment1.target=commands.Command\ buildCommandWithSwitch(java.lang.String,\ java
 comment1.text=\n\ very\ simple\ solution\ using\ switches.\n
 comment2.params=word1\ word2
 comment2.target=commands.Command\ buildCommandWithMap(java.lang.String,\ java.lang.String)
+comment2.text=\n\ This\ looks\ (and\ is)\ complicated\ but\ basically\ just\ \n\ creates\ an\ Instance\ of\ a\ class\ given\ as\ a\ String\ \n\ from\ the\ map\ above.\n
 numComments=3
