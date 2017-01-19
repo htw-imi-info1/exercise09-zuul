@@ -1,9 +1,10 @@
 #BlueJ class context
-comment0.params=
-comment0.target=CommandWords()
-comment0.text=\n\ Constructor\ -\ initialise\ the\ command\ words.\n
+comment0.params=word1\ word2
+comment0.target=commands.Command\ buildCommand(java.lang.String,\ java.lang.String)
+comment0.text=\n\ This\ is\ \n
 comment1.params=word1\ word2
-comment1.target=commands.Command\ buildCommand(java.lang.String,\ java.lang.String)
+comment1.target=commands.Command\ buildCommandWithSwitch(java.lang.String,\ java.lang.String)
+comment1.text=\n\ very\ simple\ solution\ using\ switches.\n
 comment2.params=word1\ word2
-comment2.target=commands.Command\ buildCommandx(java.lang.String,\ java.lang.String)
+comment2.target=commands.Command\ buildCommandWithMap(java.lang.String,\ java.lang.String)
 numComments=3
