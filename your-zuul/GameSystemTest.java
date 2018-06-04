@@ -110,20 +110,9 @@ public class GameSystemTest
     }
 
     @Test
-    public void testCoffee()
-    {
-        //given: game with currentRoom: computer Lab
-        game.processCommand("go south");
-        //when
-        String output = game.processCommand("go east");
-        //then
-        assertEquals(true, output.contains("coffee machine"));
-    }
-
-    @Test
     public void completeWalkthrough()
     {
-        goAndSee("east",  "lecture theatre");
+        goAndSee("east",  "lecture theater");
         goAndSee("west",  "main entrance");
         goAndSee("west",  "campus pub");
         goAndSee("east",  "main entrance");
