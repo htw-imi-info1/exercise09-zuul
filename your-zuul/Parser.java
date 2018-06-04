@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 /**
  * This class is part of the "World of Zuul" application. 
@@ -14,12 +13,12 @@ import java.util.StringTokenizer;
  * the known commands, and if the input is not one of the known commands, it
  * returns a command object that is marked as an unknown command.
  * 
- * @author  Michael Kolling and David J. Barnes
- * @version 2008.03.30
+ * @author  Michael Kölling and David J. Barnes
+ * @version 2016.02.29
  */
 public class Parser 
 {
-    private CommandWords commandWords;  // holds all valid command words
+    private CommandWords commands;  // holds all valid command words
     private Scanner reader;         // source of command input
 
     /**
@@ -27,13 +26,8 @@ public class Parser
      */
     public Parser() 
     {
-        commandWords = new CommandWords();
+        commands = new CommandWords();
         reader = new Scanner(System.in);
-    }
-
-    private String readLine(){
-        System.out.print("> ");     // print prompt
-        return  reader.nextLine();
     }
 
     /**
@@ -41,13 +35,13 @@ public class Parser
      */
     public Command getCommand() 
     {
-        String inputLine = readLine(); 
-        return getCommand(inputLine);
-    }
-    public Command getCommand(String inputLine){
-        
+        String inputLine;   // will hold the full input line
         String word1 = null;
         String word2 = null;
+
+        System.out.print("> ");     // print prompt
+
+        inputLine = reader.nextLine();
 
         // Find up to two words on the line.
         Scanner tokenizer = new Scanner(inputLine);
@@ -61,7 +55,7 @@ public class Parser
 
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
-        if(commandWords.isCommand(word1)) {
+        if(commands.isCommand(word1)) {
             return new Command(word1, word2);
         }
         else {
