@@ -134,6 +134,7 @@ public class GameSystemTest
     public void showExits(){
         game.processCommand("go south");
         String result = game.processCommand("go north");
+        assertTrue(result.contains("Exits:"));
         assertTrue(result.contains("east"));
         assertTrue(result.contains("south"));
         assertTrue(result.contains("west"));
