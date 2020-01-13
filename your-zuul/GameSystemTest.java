@@ -1,4 +1,4 @@
-
+import commands.*;
 import static org.hamcrest.Matcher.*;
 import static org.junit.Assert.*;
 import org.junit.After;
@@ -59,14 +59,6 @@ public class GameSystemTest
     }
 
     @Test
-    public void testUnknownCommand(){
-        // given arbitrary game
-        // when entering unknown command
-        String output = game.processCommand("asdf");
-        // then an error message should be returned
-        assertTrue("should output error message", output.contains("I don't know what you mean"));
-    }
-    @Test
     public void testGoSouth()
     {
         //given: new game
@@ -110,9 +102,20 @@ public class GameSystemTest
     }
 
     @Test
+    public void testCoffee()
+    {
+        //given: game with currentRoom: computer Lab
+        game.processCommand("go south");
+        //when
+        String output = game.processCommand("go east");
+        //then
+        assertEquals(true, output.contains("coffee machine"));
+    }
+
+    @Test
     public void completeWalkthrough()
     {
-        goAndSee("east",  "lecture theater");
+        goAndSee("east",  "lecture theatre");
         goAndSee("west",  "main entrance");
         goAndSee("west",  "campus pub");
         goAndSee("east",  "main entrance");
@@ -134,7 +137,6 @@ public class GameSystemTest
     public void showExits(){
         game.processCommand("go south");
         String result = game.processCommand("go north");
-        assertTrue(result.contains("Exits:"));
         assertTrue(result.contains("east"));
         assertTrue(result.contains("south"));
         assertTrue(result.contains("west"));

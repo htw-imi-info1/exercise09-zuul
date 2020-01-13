@@ -1,41 +1,91 @@
+import java.util.HashMap;
+import java.lang.reflect.Constructor;
+import commands.*;
 /**
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
+ * CommandWords is the only place which "knows" about command words.
+ * I've provided two alternate solutions how command words can be
+ * mapped to the Subclasses of Command implementing the respective 
+ * Command - one very simple one, using a switch, and a more
+ * elaborate one, using a data structure mapping the command words
+ * to the names of the implementing class.
  * 
- * This class holds an enumeration of all command words known to the game.
- * It is used to recognise commands as they are typed in.
- *
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * The second method is the more general one, as the information 
+ * doesn't need to be in the source code (e.g. read from a configuration
+ * file allowing you to configure a new language withouth altering the
+ * source code) or even allow command name mappings to be dynamic, e.g.
+ * be changed with a command in the game.
+ * 
+ * The caveat is that the instatiation of a class from the class name
+ * is rather complicated, this is why I included the simple solution with
+ * the switch. You can toggle the implementation using the 
+ * USE_SIMPLE_IMPLEMENTATION field. 
  */
-
 public class CommandWords
 {
-    // a constant array that holds all valid command words
-    private static final String[] validCommands = {
-        "go", "quit", "help"
-    };
-
+    private static boolean USE_SIMPLE_IMPLEMENTATION = true;
     /**
-     * Constructor - initialise the command words.
+     * This is 
      */
-    public CommandWords()
-    {
-        // nothing to do at the moment...
+    public static Command buildCommand(String word1, String word2){
+
+        if (USE_SIMPLE_IMPLEMENTATION)
+            return buildCommandWithSwitch(word1, word2);
+        else 
+            return buildCommandWithMap(word1, word2);
+
     }
 
     /**
-     * Check whether a given String is a valid command word. 
-     * @return true if a given string is a valid command,
-     * false if it isn't.
+     * very simple solution using switches.
      */
-    public boolean isCommand(String aString)
+    public static Command buildCommandWithSwitch(String word1, String word2){
+        switch(word1){
+            case "go" : return new Go(word2);
+            case "quit" : return new Quit(word2);
+            case "help" : return new Help(word2);
+            default: return new Unknown(word2);
+        } 
+    }
+    /**
+     * it's also possible to have the mapping in a Data Structure 
+     * (and thus configurable, e.g. read from a configuration file,
+     * also possible to change it during runtime!)
+     * but the instatiation of the Command Subclasses requires reflection
+     * and is rather bulky.
+     */
+    private static HashMap<String, String> commands;
+    static {
+        commands = new HashMap<>();
+        commands.put("go","commands.Go");
+        commands.put("help","commands.Help");
+        commands.put("quit","commands.Quit");
+    }
+    /**
+     * This looks (and is) complicated but basically just 
+     * creates an Instance of a class given as a String 
+     * from the map above.
+     */
+    @SuppressWarnings("unchecked")
+    public static Command buildCommandWithMap(String word1, String word2)
     {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
-                return true;
+        try{
+            // get the Class
+            Class commandClass = Class.forName(commands.get(word1));
+            if (commandClass == null){
+                return new Unknown(word2);
+            }else {
+                // get the constructor. for this we need an
+                // Array of the Parameter types (here: just a String)
+                Class<?>[] parameterTypes = {String.class};
+                Constructor<? extends Command> commandConstructor = commandClass.getDeclaredConstructor(parameterTypes);
+                // now we have the constructor! Call it to get an instance.
+                return commandConstructor.newInstance(word2);
+
+            }
+        } catch(Exception c){
+            System.out.println(c);
+            System.out.println(c.getMessage());
+            return new Unknown(word2);
         }
-        // if we get here, the string was not found in the commands
-        return false;
     }
 }

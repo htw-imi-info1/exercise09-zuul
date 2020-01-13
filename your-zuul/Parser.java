@@ -1,5 +1,6 @@
 import java.util.Scanner;
-
+import java.util.StringTokenizer;
+import commands.Command;
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -13,12 +14,12 @@ import java.util.Scanner;
  * the known commands, and if the input is not one of the known commands, it
  * returns a command object that is marked as an unknown command.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Michael Kolling and David J. Barnes
+ * @version 2008.03.30
  */
 public class Parser 
 {
-    private CommandWords commands;  // holds all valid command words
+    private CommandWords commandWords;  // holds all valid command words
     private Scanner reader;         // source of command input
 
     /**
@@ -26,23 +27,25 @@ public class Parser
      */
     public Parser() 
     {
-        commands = new CommandWords();
+        commandWords = new CommandWords();
         reader = new Scanner(System.in);
+    }
+
+    private String readLine()
+    {
+        System.out.print("> ");     // print prompt
+        return reader.nextLine();
     }
 
     /**
      * @return The next command from the user.
      */
-    public Command getCommand() {
-        String inputLine = readLine();
+    public Command getCommand() 
+    {
+        String inputLine = readLine(); 
         return getCommand(inputLine);
     }
-
-    private String readLine(){    
-        System.out.print("> ");     // print prompt
-        return reader.nextLine();
-    }
-
+    
     public Command getCommand(String inputLine)
     {
         String word1 = null;
@@ -57,14 +60,7 @@ public class Parser
                 // note: we just ignore the rest of the input line.
             }
         }
-
-        // Now check whether this word is known. If so, create a command
-        // with it. If not, create a "null" command (for unknown command).
-        if(commands.isCommand(word1)) {
-            return new Command(word1, word2);
-        }
-        else {
-            return new Command(null, word2); 
-        }
+        return CommandWords.buildCommand(word1,word2);
+        
     }
 }
