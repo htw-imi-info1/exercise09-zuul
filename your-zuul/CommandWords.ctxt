@@ -1,10 +1,13 @@
 #BlueJ class context
 comment0.target=CommandWords
-comment0.text=\n\ This\ class\ is\ part\ of\ the\ "World\ of\ Zuul"\ application.\ \n\ "World\ of\ Zuul"\ is\ a\ very\ simple,\ text\ based\ adventure\ game.\ \ \n\ \n\ This\ class\ holds\ an\ enumeration\ of\ all\ command\ words\ known\ to\ the\ game.\n\ It\ is\ used\ to\ recognise\ commands\ as\ they\ are\ typed\ in.\n\n\ @author\ \ Michael\ K\u00C3\u00B6lling\ and\ David\ J.\ Barnes\n\ @version\ 2016.02.29\n
-comment1.params=
-comment1.target=CommandWords()
-comment1.text=\n\ Constructor\ -\ initialise\ the\ command\ words.\n
-comment2.params=aString
-comment2.target=boolean\ isCommand(java.lang.String)
-comment2.text=\n\ Check\ whether\ a\ given\ String\ is\ a\ valid\ command\ word.\ \n\ @return\ true\ if\ a\ given\ string\ is\ a\ valid\ command,\n\ false\ if\ it\ isn't.\n
-numComments=3
+comment0.text=\n\ CommandWords\ is\ the\ only\ place\ which\ "knows"\ about\ command\ words.\n\ I've\ provided\ two\ alternate\ solutions\ how\ command\ words\ can\ be\n\ mapped\ to\ the\ Subclasses\ of\ Command\ implementing\ the\ respective\ \n\ Command\ -\ one\ very\ simple\ one,\ using\ a\ switch,\ and\ a\ more\n\ elaborate\ one,\ using\ a\ data\ structure\ mapping\ the\ command\ words\n\ to\ the\ names\ of\ the\ implementing\ class.\n\ \n\ The\ second\ method\ is\ the\ more\ general\ one,\ as\ the\ information\ \n\ doesn't\ need\ to\ be\ in\ the\ source\ code\ (e.g.\ read\ from\ a\ configuration\n\ file\ allowing\ you\ to\ configure\ a\ new\ language\ withouth\ altering\ the\n\ source\ code)\ or\ even\ allow\ command\ name\ mappings\ to\ be\ dynamic,\ e.g.\n\ be\ changed\ with\ a\ command\ in\ the\ game.\n\ \n\ The\ caveat\ is\ that\ the\ instatiation\ of\ a\ class\ from\ the\ class\ name\n\ is\ rather\ complicated,\ this\ is\ why\ I\ included\ the\ simple\ solution\ with\n\ the\ switch.\ You\ can\ toggle\ the\ implementation\ using\ the\ \n\ USE_SIMPLE_IMPLEMENTATION\ field.\ \n
+comment1.params=word1\ word2
+comment1.target=Command\ buildCommand(java.lang.String,\ java.lang.String)
+comment1.text=\n\ This\ is\ \n
+comment2.params=word1\ word2
+comment2.target=Command\ buildCommandWithSwitch(java.lang.String,\ java.lang.String)
+comment2.text=\n\ very\ simple\ solution\ using\ switches.\n
+comment3.params=word1\ word2
+comment3.target=Command\ buildCommandWithMap(java.lang.String,\ java.lang.String)
+comment3.text=\n\ This\ looks\ (and\ is)\ complicated\ but\ basically\ just\ \n\ creates\ an\ Instance\ of\ a\ class\ given\ as\ a\ String\ \n\ from\ the\ map\ above.\n
+numComments=4

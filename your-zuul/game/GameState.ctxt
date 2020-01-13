@@ -1,0 +1,4 @@
+#BlueJ class context
+comment0.target=GameState
+comment0.text=\n\ This\ class\ represents\ the\ game\ status\n\ (for\ a\ specific\ player)\n\ it\ is\ passed\ to\ and\ returned\ by\n\ Command\#execute.\n\ It\ is\ just\ a\ Data\ Class,\ holding\ state\ -\n\ therefore\ it\ has\ only\ protected\ fields,\n\ which\ can\ be\ manipulated\ and\ read\ directly.\n\n\ @author\ B\ Kleinen\n
+numComments=1
