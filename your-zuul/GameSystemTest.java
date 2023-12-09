@@ -1,9 +1,6 @@
-
-import static org.hamcrest.Matcher.*;
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is a Game System Tests - it tests the
@@ -26,7 +23,7 @@ public class GameSystemTest
      *
      * Called before every test case method.
      */
-    @Before
+    @BeforeEach
     public void setUp()
     {
         game = new Game();
@@ -39,9 +36,7 @@ public class GameSystemTest
         //when
         String output = game.processCommand("quit");
         //then
-        assertEquals(
-            "null is the output that signals that the main loop should stop",
-            null,output);
+        assertEquals(null,output,"null is the output that signals that the main loop should stop");
     }
 
     @Test
@@ -52,10 +47,10 @@ public class GameSystemTest
         //when
         String output = game.processCommand("help");
         //then
-        assertTrue("should print help message containing command words", output.contains("command words"));
-        assertTrue("message contains command word go", output.contains("go"));
-        assertTrue("message contains command word quit", output.contains("quit"));
-        assertTrue("message contains command word help", output.contains("help"));
+        assertTrue(output.contains("command words"));
+        assertTrue(output.contains("go"));
+        assertTrue(output.contains("quit"));
+        assertTrue(output.contains("help"));
     }
 
     @Test
@@ -64,7 +59,7 @@ public class GameSystemTest
         // when entering unknown command
         String output = game.processCommand("asdf");
         // then an error message should be returned
-        assertTrue("should output error message", output.contains("I don't know what you mean"));
+        assertTrue(output.contains("I don't know what you mean"));
     }
     @Test
     public void testGoSouth()
@@ -73,8 +68,7 @@ public class GameSystemTest
         //when
         String output = game.processCommand("go south");
         //then
-        assertTrue("should be in computing lab"+output,
-            output.contains("computing lab"));
+        assertTrue(output.contains("computing lab"),"should be in computing lab, output was: \n"+output);
     }
 
     @Test
@@ -84,7 +78,7 @@ public class GameSystemTest
         //when
         String output = game.processCommand("go north");
         //then
-        assertEquals(true, output.contains("no door"));
+        assertTrue(output.contains("no door"));
     }
 
     /**
@@ -97,7 +91,7 @@ public class GameSystemTest
         //when
         String output = game.processCommand("go");
         //then
-        assertEquals(true, output.contains("Go where"));
+        assertTrue(output.contains("Go where"));
     }
 
     /**
