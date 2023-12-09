@@ -34,7 +34,7 @@ public class GameSystemTest
     {
         //given: new game
         //when
-        String output = game.processCommand("quit");
+        String output = game.processInputLine("quit");
         //then
         assertEquals(null,output,"null is the output that signals that the main loop should stop");
     }
@@ -45,7 +45,7 @@ public class GameSystemTest
         //given: new game
 
         //when
-        String output = game.processCommand("help");
+        String output = game.processInputLine("help");
         //then
         assertTrue(output.contains("command words"));
         assertTrue(output.contains("go"));
@@ -57,7 +57,7 @@ public class GameSystemTest
     public void testUnknownCommand(){
         // given arbitrary game
         // when entering unknown command
-        String output = game.processCommand("asdf");
+        String output = game.processInputLine("asdf");
         // then an error message should be returned
         assertTrue(output.contains("I don't know what you mean"));
     }
@@ -66,7 +66,7 @@ public class GameSystemTest
     {
         //given: new game
         //when
-        String output = game.processCommand("go south");
+        String output = game.processInputLine("go south");
         //then
         assertTrue(output.contains("computing lab"),"should be in computing lab, output was: \n"+output);
     }
@@ -76,7 +76,7 @@ public class GameSystemTest
     {
         //given: new game
         //when
-        String output = game.processCommand("go north");
+        String output = game.processInputLine("go north");
         //then
         assertTrue(output.contains("no door"));
     }
@@ -89,7 +89,7 @@ public class GameSystemTest
     {
         //given: new game
         //when
-        String output = game.processCommand("go");
+        String output = game.processInputLine("go");
         //then
         assertTrue(output.contains("Go where"));
     }
@@ -100,7 +100,7 @@ public class GameSystemTest
     @Test
     public void goWODirectionShouldShowError()
     {
-        assertEquals("Go where?", game.processCommand("go"));
+        assertEquals("Go where?", game.processInputLine("go"));
     }
 
     @Test
@@ -118,7 +118,7 @@ public class GameSystemTest
 
     private void goAndSee(String direction, String whatShouldBeContained){
         //when
-        String result = game.processCommand("go "+direction);
+        String result = game.processInputLine("go "+direction);
         //then
         if (!result.contains(whatShouldBeContained))
             fail(result +" does not contain "+whatShouldBeContained);
@@ -126,8 +126,8 @@ public class GameSystemTest
 
     @Test
     public void showExits(){
-        game.processCommand("go south");
-        String result = game.processCommand("go north");
+        game.processInputLine("go south");
+        String result = game.processInputLine("go north");
         assertTrue(result.contains("Exits:"));
         assertTrue(result.contains("east"));
         assertTrue(result.contains("south"));
@@ -136,8 +136,8 @@ public class GameSystemTest
 
     @Test
     public void showCommands(){
-        game.processCommand("go south");
-        String result = game.processCommand("go north");
+        game.processInputLine("go south");
+        String result = game.processInputLine("go north");
         assertTrue(result.contains("east"));
         assertTrue(result.contains("south"));
         assertTrue(result.contains("west"));

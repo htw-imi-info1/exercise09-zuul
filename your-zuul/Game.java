@@ -83,8 +83,8 @@ public class Game
      * @param commandLine - the line entered as String
      * @return output of the command
      */
-    public String processCommand(String commandLine){
-        Command command = parser.getCommand(commandLine);
+    public String processInputLine(String line){
+        Command command = parser.getCommand(line);
         return processCommand(command);
     }
 
