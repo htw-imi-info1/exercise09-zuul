@@ -1,3 +1,14 @@
+
+exercise09
+==========
+Project: your-zuul
+
+A bad zuul with Unit Tests, used for [Exercise 10 in Info1](http://bkleinen.github.io/info1/labs/exercise09.html).
+
+
+based on:
+----------
+
 Project: zuul-bad
 Authors: Michael Kölling and David J. Barnes
 
@@ -25,3 +36,4 @@ project, and how to fix them.
 
 The project 'zuul-better' contains a version of this project with better
 designed class structure. It includes the fixes discussed in the book.
+
