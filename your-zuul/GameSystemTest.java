@@ -61,16 +61,11 @@ public class GameSystemTest
         // then an error message should be returned
         assertTrue(output.contains("I don't know what you mean"));
     }
-    @Test
-    public void testGoSouth()
-    {
-        //given: new game
-        //when
-        String output = game.processInputLine("go south");
-        //then
-        assertTrue(output.contains("computing lab"),"should be in computing lab, output was: \n"+output);
-    }
-
+    
+    /** 
+     * This test is dependent on the first room's exits and
+     * may need to be adapted if you change the world.
+     */
     @Test
     public void testGoNorth()
     {
@@ -80,10 +75,19 @@ public class GameSystemTest
         //then
         assertTrue(output.contains("no door"));
     }
-
-    /**
-     * version 1: manual test case
+    /** 
+     * This test is dependent on the first and second room's exits and
+     * may need to be adapted if you change the world.
      */
+    @Test
+    public void showExits(){
+        game.processInputLine("go south");
+        String result = game.processInputLine("go north");
+        assertTrue(result.contains("Exits:"));
+        assertTrue(result.contains("east"));
+        assertTrue(result.contains("south"));
+        assertTrue(result.contains("west"));
+    }
     @Test
     public void testGoWithoutDirection()
     {
@@ -94,15 +98,14 @@ public class GameSystemTest
         assertTrue(output.contains("Go where"));
     }
 
+    
+  
     /**
-     * version 2: recorded test case
+     * This test needs to be adapted to your world.
+     * If your world becomes very complicated, you 
+     * may want to split the walkthrough up to 
+     * several tests.
      */
-    @Test
-    public void goWODirectionShouldShowError()
-    {
-        assertEquals("Go where?", game.processInputLine("go"));
-    }
-
     @Test
     public void completeWalkthrough()
     {
@@ -124,22 +127,5 @@ public class GameSystemTest
             fail(result +" does not contain "+whatShouldBeContained);
     }
 
-    @Test
-    public void showExits(){
-        game.processInputLine("go south");
-        String result = game.processInputLine("go north");
-        assertTrue(result.contains("Exits:"));
-        assertTrue(result.contains("east"));
-        assertTrue(result.contains("south"));
-        assertTrue(result.contains("west"));
-    }
 
-    @Test
-    public void showCommands(){
-        game.processInputLine("go south");
-        String result = game.processInputLine("go north");
-        assertTrue(result.contains("east"));
-        assertTrue(result.contains("south"));
-        assertTrue(result.contains("west"));
-    }
 }
