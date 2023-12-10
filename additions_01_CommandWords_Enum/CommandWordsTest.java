@@ -15,7 +15,7 @@ public class CommandWordsTest
     @BeforeEach
     public void setUp()
     {
-        commandWords1 = new CommandWords();
+        
     }
 
     @Test
