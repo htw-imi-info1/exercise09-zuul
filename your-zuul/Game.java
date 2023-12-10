@@ -141,9 +141,6 @@ public class Game
             case "quit": 
                 result = quit(command); 
                 break;
-            default : 
-                result = "I don't know what you mean..."; 
-                break;
         }
 
         return result ;

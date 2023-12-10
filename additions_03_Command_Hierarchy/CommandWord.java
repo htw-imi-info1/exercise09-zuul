@@ -35,7 +35,6 @@ public enum CommandWord
     private static Map<CommandWord, BiFunction<CommandWord,String,Command>> commandFactories = new LinkedHashMap<>();
 
     static {
-        System.out.println("load CommandWord");
         commandFactories.put(GO, (w1,w2)-> new Go(w1,w2));
         commandFactories.put(QUIT, (w1,w2)-> new Quit(w1,w2));
         commandFactories.put(HELP, (w1,w2)-> new Help(w1,w2));
