@@ -129,14 +129,21 @@ public class Game
         }
         String result = null;
         String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
-            result = printHelp();
-        }
-        else if (commandWord.equals("go")) {
-            result = goRoom(command);
-        }
-        else if (commandWord.equals("quit")) {
-            result = quit(command);
+        // see https://docs.oracle.com/javase/8/docs/technotes/guides/language/strings-switch.html
+        
+        switch(commandWord){
+            case "help": 
+                result = printHelp();
+                break;
+            case "go": 
+                result = goRoom(command); 
+                break;
+            case "quit": 
+                result = quit(command); 
+                break;
+            default : 
+                result = "I don't know what you mean..."; 
+                break;
         }
 
         return result ;
