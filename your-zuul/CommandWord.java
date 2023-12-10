@@ -9,7 +9,7 @@
  * @version 2016.02.29
  */
 
-public enum CommandWords
+public enum CommandWord
 {
 
     GO("go"), 
@@ -19,7 +19,7 @@ public enum CommandWords
     HELP("help");
 
     private String word;
-    private CommandWords(String word){
+    private CommandWord(String word){
         this.word = word;
     }
 
@@ -35,8 +35,8 @@ public enum CommandWords
      */
     public static boolean isCommand(String aString)
     {
-        CommandWords[] validCommands = CommandWords.class.getEnumConstants();
-        for(CommandWords cw: validCommands) {
+        CommandWord[] validCommands = CommandWord.class.getEnumConstants();
+        for(CommandWord cw: validCommands) {
             if(cw.toString().equals(aString))
                 return true;
         }
