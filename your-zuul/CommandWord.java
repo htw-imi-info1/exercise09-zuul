@@ -35,7 +35,7 @@ public enum CommandWord
      */
     public static boolean isCommand(String aString)
     {
-        CommandWord[] validCommands = CommandWord.class.getEnumConstants();
+        CommandWord[] validCommands = values();
         for(CommandWord cw: validCommands) {
             if(cw.toString().equals(aString))
                 return true;

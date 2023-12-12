@@ -18,14 +18,14 @@ import java.util.Scanner;
  */
 public class Parser 
 {
-    private Scanner reader;         // source of command input
+    private Scanner scanner;         // source of command input
 
     /**
      * Create a parser to read from the terminal window.
      */
     public Parser() 
     {
-        reader = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     /**
@@ -38,7 +38,7 @@ public class Parser
 
     private String readLine(){    
         System.out.print("> ");     // print prompt
-        return reader.nextLine();
+        return scanner.nextLine();
     }
 
     public Command getCommand(String inputLine)
