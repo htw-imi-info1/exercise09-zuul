@@ -3,9 +3,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CommandWordsTest
+public class CommandWordTest
 {
-    private CommandWords commandWords1;
+    private CommandWord commandWord1;
 
     /**
      * Sets up the test fixture.
@@ -23,7 +23,7 @@ public class CommandWordsTest
     {
         String[] validCommands = {"help", "quit", "go"};
         for(String cw : validCommands){
-            assertEquals(true, commandWords1.isCommand(cw));
+            assertEquals(true, commandWord1.isCommand(cw));
         }
 
     }
@@ -33,7 +33,7 @@ public class CommandWordsTest
     {
         String[] inValidCommands = {"hxxx"};
         for(String cw : inValidCommands){
-            assertEquals(false, commandWords1.isCommand(cw));
+            assertEquals(false, commandWord1.isCommand(cw));
         }
 
     }
