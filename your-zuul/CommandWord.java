@@ -1,3 +1,12 @@
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.function.Supplier;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.function.BiFunction;
+import java.util.LinkedHashMap;
+
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -11,7 +20,6 @@
 
 public enum CommandWord
 {
-
     GO("go"), 
 
     QUIT("quit"), 
@@ -19,10 +27,22 @@ public enum CommandWord
     HELP("help"),
 
     LOOK("look"),
-    
-    EAT("eat"),
+
+    EAT("eat"), 
 
     UNKNOWN("unknown");
+
+    private static Map<CommandWord, BiFunction<CommandWord,String,Command>> commandFactories = new LinkedHashMap<>();
+
+    static {
+        commandFactories.put(GO, (w1,w2)-> new Go(w1,w2));
+        commandFactories.put(QUIT, (w1,w2)-> new Quit(w1,w2));
+        commandFactories.put(HELP, (w1,w2)-> new Help(w1,w2));
+        commandFactories.put(LOOK, (w1,w2)-> new Look(w1,w2));
+        commandFactories.put(EAT, (w1,w2)-> new Eat(w1,w2)); 
+        commandFactories.put(UNKNOWN, (w1,w2)-> new Unknown(w1,w2)); 
+    
+   }
 
     private String word;
     private CommandWord(String word){
@@ -32,14 +52,6 @@ public enum CommandWord
     @Override
     public String toString(){
         return word;
-    }
-
-    public static CommandWord forString(String commandWord){
-        for(CommandWord cw: values()) {
-            if(cw.toString().equals(commandWord))
-                return cw;
-        }
-        return UNKNOWN;
     }
 
     /**
@@ -58,9 +70,27 @@ public enum CommandWord
         return false;
     }
 
-    public static Command buildCommand(String word1, String word2){
-        CommandWord cw = forString(word1);
-
-        return new Command(cw, word2);
+    public static CommandWord forString(String commandWord){
+        for(CommandWord cw: values()) {
+            if(cw.toString().equals(commandWord))
+                return cw;
+        }
+        return UNKNOWN;
     }
+
+    public static Command buildCommand(String firstWord, String secondWord){
+        CommandWord key = forString(firstWord);
+        return commandFactories.get(key).apply(key, secondWord);
+    }
+
+    public static String getCommandWords(){
+        return commandFactories
+        .keySet()
+        .stream()
+        .filter(key -> !UNKNOWN.equals(key))
+        .map(key -> key.toString())
+        .collect(Collectors.joining(" "));
+    }
+
 }
+
