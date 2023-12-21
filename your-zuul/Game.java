@@ -18,13 +18,14 @@
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private Player player;
 
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        player = new Player();
         createRooms();
         parser = new Parser();
     }
@@ -50,7 +51,8 @@ public class Game
         lab.setExits(outside, office, null, null);
         office.setExits(null, null, null, lab);
 
-        currentRoom = outside;  // start game outside
+        // start game outside
+        player.setCurrentRoom(outside);
     }
 
     /**
@@ -93,6 +95,7 @@ public class Game
      */
     private void printWelcome()
     {
+        Room currentRoom = player.getCurrentRoom();
         System.out.println();
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
@@ -122,28 +125,7 @@ public class Game
      */
     private String processCommand(Command command) 
     {
-        boolean wantToQuit = false;
-
-        if(command.isUnknown()) {
-            return "I don't know what you mean...";       
-        }
-        String result = null;
-        String commandWord = command.getCommandWord();
-        // see https://docs.oracle.com/javase/8/docs/technotes/guides/language/strings-switch.html
-        
-        switch(commandWord){
-            case "help": 
-                result = printHelp();
-                break;
-            case "go": 
-                result = goRoom(command); 
-                break;
-            case "quit": 
-                result = quit(command); 
-                break;
-        }
-
-        return result ;
+        return command.processCommand(player);
     }
 
     // implementations of user commands:
@@ -172,6 +154,7 @@ public class Game
      */
     private String goRoom(Command command) 
     {
+         Room currentRoom = player.getCurrentRoom();
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             return "Go where?";

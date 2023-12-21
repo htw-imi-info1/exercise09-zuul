@@ -60,7 +60,33 @@ public class Room
      */
     public String getDescription()
     {
-        return description;
+        String result = "You are "+description;
+        result += "\n";
+        Room currentRoom = this;
+        result += "Exits: ";
+        if(currentRoom.northExit != null) {
+            result += "north ";
+        }
+        if(currentRoom.eastExit != null) {
+            result += "east ";
+        }
+        if(currentRoom.southExit != null) {
+            result += "south ";
+        }
+        if(currentRoom.westExit != null) {
+            result += "west ";
+        }
+        return result;
+    }
+
+    public Room getExit(String direction){
+        switch (direction){
+            case "north": return northExit;
+            case "south": return southExit;
+            case "east": return eastExit;
+            case "west": return westExit;
+            default: return null;
+        }
     }
 
 }
