@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=CommandWordTest
+comment1.params=
+comment1.target=void\ setUp()
+comment1.text=\n\ Sets\ up\ the\ test\ fixture.\n\n\ Called\ before\ every\ test\ case\ method.\n
+comment2.params=
+comment2.target=void\ validCommands()
+comment3.params=
+comment3.target=void\ inValidCommands()
+numComments=4
