@@ -18,14 +18,14 @@ import java.util.Scanner;
  */
 public class Parser 
 {
-    private Scanner scanner;         // source of command input
+    private Scanner reader;         // source of command input
 
     /**
      * Create a parser to read from the terminal window.
      */
     public Parser() 
     {
-        scanner = new Scanner(System.in);
+        reader = new Scanner(System.in);
     }
 
     /**
@@ -38,7 +38,7 @@ public class Parser
 
     private String readLine(){    
         System.out.print("> ");     // print prompt
-        return scanner.nextLine();
+        return reader.nextLine();
     }
 
     public Command getCommand(String inputLine)
@@ -55,14 +55,6 @@ public class Parser
                 // note: we just ignore the rest of the input line.
             }
         }
-
-        // Now check whether this word is known. If so, create a command
-        // with it. If not, create a "null" command (for unknown command).
-        if(CommandWord.isCommand(word1)) {
-            return new Command(word1, word2);
-        }
-        else {
-            return new Command(null, word2); 
-        }
+        return CommandWord.buildCommand(word1, word2);
     }
 }

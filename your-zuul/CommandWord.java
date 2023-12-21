@@ -16,7 +16,13 @@ public enum CommandWord
 
     QUIT("quit"), 
 
-    HELP("help");
+    HELP("help"),
+
+    LOOK("look"),
+    
+    EAT("eat"),
+
+    UNKNOWN("unknown");
 
     private String word;
     private CommandWord(String word){
@@ -28,6 +34,14 @@ public enum CommandWord
         return word;
     }
 
+    public static CommandWord forString(String commandWord){
+        for(CommandWord cw: values()) {
+            if(cw.toString().equals(commandWord))
+                return cw;
+        }
+        return UNKNOWN;
+    }
+
     /**
      * Check whether a given String is a valid command word. 
      * @return true if a given string is a valid command,
@@ -35,12 +49,18 @@ public enum CommandWord
      */
     public static boolean isCommand(String aString)
     {
-        CommandWord[] validCommands = CommandWord.values();
+        CommandWord[] validCommands = CommandWord.class.getEnumConstants();
         for(CommandWord cw: validCommands) {
             if(cw.toString().equals(aString))
                 return true;
         }
         // if we get here, the string was not found in the commands
         return false;
+    }
+
+    public static Command buildCommand(String word1, String word2){
+        CommandWord cw = forString(word1);
+
+        return new Command(cw, word2);
     }
 }
